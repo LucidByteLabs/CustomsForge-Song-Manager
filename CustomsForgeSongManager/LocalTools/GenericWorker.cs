@@ -147,29 +147,33 @@ namespace CustomsForgeSongManager.LocalTools
                     {
                         int ndxLocal = ndx; // prevent data not available error
                         RepairOptions repairOptionsLocal = repairOptions;
-                        Globals.Log("Starting multi-thread task in core (" + ndxLocal + ") ...");
 
-                        tasks[ndx] = Task.Factory.StartNew(() =>
+                        if (songsSubLists[ndxLocal]?.Count > 0)
                         {
-                            // cross threading protection
-                            GenExtensions.InvokeIfRequired(workOrder, delegate
+                            Globals.Log("Starting multi-thread task in core (" + ndxLocal + ") ...");
+
+                            tasks[ndx] = Task.Factory.StartNew(() =>
                             {
-                                var result = RepairTools.RepairSongs(songsSubLists[ndxLocal], repairOptionsLocal).ToString();
-                                if (!String.IsNullOrEmpty(result))
-                                    workerResults += result;
+                                // cross threading protection
+                                GenExtensions.InvokeIfRequired(workOrder, delegate
+                                {
+                                    var result = RepairTools.RepairSongs(songsSubLists[ndxLocal], repairOptionsLocal).ToString();
+                                    if (!String.IsNullOrEmpty(result))
+                                        workerResults += result;
+                                });
                             });
-                        });
 
-                        try
-                        {
-                            var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total"); // , "MyComputer"
-                            cpuCounter.NextValue();
-                            Thread.Sleep(1000);
-                            Globals.Log("CPU usage for core (" + ndxLocal + "): " + (int)cpuCounter.NextValue() + "% ...");
-                        }
-                        catch
-                        {
-                            Globals.Log("<WARNING> CPU usage for core (" + ndxLocal + ") is not available ...");
+                            try
+                            {
+                                var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total"); // , "MyComputer"
+                                cpuCounter.NextValue();
+                                Thread.Sleep(1000);
+                                Globals.Log("CPU usage for core (" + ndxLocal + "): " + (int)cpuCounter.NextValue() + "% ...");
+                            }
+                            catch
+                            {
+                                Globals.Log("<WARNING> CPU usage for core (" + ndxLocal + ") is not available ...");
+                            }
                         }
                     }
 

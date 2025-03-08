@@ -440,6 +440,13 @@ namespace CustomsForgeSongManager.LocalTools
                         skipped++;
                         isSkipped = true;
                     }
+
+                    if (isOfficialRepairedDisabled.Contains("DLC Builder"))
+                    {
+                        Globals.Log(" - Skipped DLC created with DLC Builder");
+                        skipped++;
+                        isSkipped = true;
+                    }
                 }
 
                 // REMASTER the CDLC file

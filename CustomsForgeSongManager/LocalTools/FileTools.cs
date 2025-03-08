@@ -475,13 +475,20 @@ namespace CustomsForgeSongManager.LocalTools
             if (entryTkInfo == null)
                 return "Official";
 
-            if (entryTkInfo != null && entryTkInfo.PackageAuthor != null)
-                if (entryTkInfo.PackageAuthor.Equals("Ubisoft"))
+            string msg = "";
+            if (entryTkInfo != null)
+            {
+                if (entryTkInfo.PackageAuthor?.Equals("Ubisoft") == true)
                     return "Official";
 
-            if (entryTkInfo != null && entryTkInfo.PackageComment != null)
-                if (entryTkInfo.PackageComment.Contains("Remastered"))
-                    return "Remastered";
+                if (entryTkInfo.PackageComment?.Contains("Remastered") == true)
+                    msg += "Remastered";
+
+                if (entryTkInfo.ToolkitVersion?.Contains("DLC Builder") == true)
+                    msg += "DLC Builder";
+
+                return msg;
+            }
 
             return null;
         }

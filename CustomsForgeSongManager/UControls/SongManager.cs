@@ -2515,7 +2515,7 @@ namespace CustomsForgeSongManager.UControls
             if (tsmiDLFolderMonitor.Checked)
             {
                 var diaMsg = "Please uncheck 'Auto Monitor Downloads Folder'" + Environment.NewLine +
-                             "before using the 'Run Selected Repair Optons'" + Environment.NewLine;
+                             "before using the 'Run Selected Repair Options'" + Environment.NewLine;
                 BetterDialog2.ShowDialog(diaMsg, "Repair Options ...", null, null, "Ok", Bitmap.FromHicon(SystemIcons.Warning.Handle), "ReadMe", 0, 150);
                 return;
             }

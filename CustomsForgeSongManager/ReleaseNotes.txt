@@ -13,6 +13,11 @@ until you can confirm it is safe by working directly with your AV provider.
 ========================================================================
 
 CFSM Release Notes
+1.6.0.4 (semi hotfix)
+- actually made the repair process skip DLC files made with the DLC Builder; previous change was only visual, the process would still go through
+- fixed the crashing issue with non latin characters in artist name
+- prevented the song background processing from spawning multiple tasks with 0 songs in the queue for the particular task
+
 1.6.0.3
 - fixed the issue where songs with missing LeaderboardChallengeRating property would stop parsing
 
