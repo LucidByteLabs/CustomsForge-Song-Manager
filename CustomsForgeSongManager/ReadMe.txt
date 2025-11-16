@@ -2,7 +2,7 @@ The PostBuild script will automatically copy the latest versions of
 these files from the 'lib' folder to where they are needed.
 
 These three xml files must be present in the application folder.
-Otherwise CSFM (RocksmithToolkitLib.dll) will throw a not initialized error.
+Otherwise CFSM (RocksmithToolkitLib.dll) will throw a not initialized error.
 
 RocksmithToolkitLib.Config.xml
 RocksmithToolkitLib.SongAppId.xml
